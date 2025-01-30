@@ -1,11 +1,13 @@
-```grpcurl -plaintext localhost:8089 list
+```
+grpcurl -plaintext localhost:8089 list
 
 Invoicer
 grpc.reflection.v1.ServerReflection
 grpc.reflection.v1alpha.ServerReflection
 ```
 
-```grpcurl -plaintext -d '{
+```
+grpcurl -plaintext -d '{
   "amount": {
     "amount": 1000,
     "currency": "USD"
