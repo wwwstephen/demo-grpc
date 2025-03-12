@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/google/uuid"
 	"github.com/wwwstephen/demo-grpc/invoicer"
 	"google.golang.org/grpc"
 )
@@ -13,10 +14,13 @@ type myInvoiceServer struct {
 	invoicer.UnimplementedInvoicerServer
 }
 
-func (s myInvoiceServer) Create(context.Context, *invoicer.CreateRequest) (*invoicer.CreateResponse, error) {
+func (s myInvoiceServer) Create(r context.Context, req *invoicer.CreateRequest) (*invoicer.CreateResponse, error) {
+	id := uuid.New()
 	return &invoicer.CreateResponse{
-		Pdf:  []byte("test"),
-		Docx: []byte("test"),
+		Id:       id.String(),
+		Sender:   req.GetSender(),
+		Receiver: req.GetReceiver(),
+		Amount:   req.GetAmount(),
 	}, nil
 }
 
